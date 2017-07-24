@@ -51,54 +51,70 @@ namespace mutils
 							   const char* msg, ...);
 }
 
-#define MUTILS_HALT() __debugbreak()
-#define MUTILS_UNUSED(x) do { (void)sizeof(x); } while(0)
+//-----------------------
+// MINGW32
+//-----------------------
 
-#ifdef MUTILS_ASSERTS_ENABLED
-	#define MUTILS_ASSERT(cond) \
-		do \
-		{ \
-			if (!(cond)) \
-			{ \
-				if (mutils::ReportFailure(#cond, __FILE__, __LINE__, 0) == \
-					mutils::Halt) \
-					MUTILS_HALT(); \
-			} \
-		} while(0)
-
-	#define MUTILS(cond, msg, ...) \
-		do \
-		{ \
-			if (!(cond)) \
-			{ \
-				if (mutils::ReportFailure(#cond, __FILE__, __LINE__, (msg), __VA_ARGS__) == \
-					mutils::Halt) \
-					MUTILS_HALT(); \
-			} \
-		} while(0)
-
-	#define MUTILS_ASSERT_FAIL(msg, ...) \
-		do \
-		{ \
-			if (mutils::ReportFailure(0, __FILE__, __LINE__, (msg), __VA_ARGS__) == \
-				mutils::Halt) \
-			MUTILS_HALT(); \
-		} while(0)
-
-	#define MUTILS_VERIFY(cond) MUTILS_ASSERT(cond)
-	#define MUTILS_VERIFY_MSG(cond, msg, ...) MUTILS(cond, msg, ##__VA_ARGS__)
-#else
-	#define MUTILS_ASSERT(condition) \
-		do { MUTILS_UNUSED(condition); } while(0)
-	#define MUTILS(condition, msg, ...) \
-		do { MUTILS_UNUSED(condition); MUTILS_UNUSED(msg); } while(0)
-	#define MUTILS_ASSERT_FAIL(msg, ...) \
-		do { MUTILS_UNUSED(msg); } while(0)
-	#define MUTILS_VERIFY(cond) (void)(cond)
-	#define MUTILS_VERIFY_MSG(cond, msg, ...) \
-		do { (void)(cond); MUTILS_UNUSED(msg); } while(0)
+#ifdef __MINGW32__
+	#define MUTILS_HALT()
+	#define MUTILS_UNUSED()
+	#define MUTILS_ASSERT(x)
 #endif
 
-#define MUTILS_STATIC_ASSERT(x) \
-	typedef char MmgStaticAssert[(x) ? 1 : -1];
+//-----------------------
+// MSVC
+//-----------------------
+
+#if (_MSC_VER == 1500)
+	#define MUTILS_HALT() __debugbreak()
+	#define MUTILS_UNUSED(x) do { (void)sizeof(x); } while(0)
+
+	#ifdef MUTILS_ASSERTS_ENABLED
+		#define MUTILS_ASSERT(cond) \
+			do \
+			{ \
+				if (!(cond)) \
+				{ \
+					if (mutils::ReportFailure(#cond, __FILE__, __LINE__, 0) == \
+						mutils::Halt) \
+						MUTILS_HALT(); \
+				} \
+			} while(0)
+
+		#define MUTILS(cond, msg, ...) \
+			do \
+			{ \
+				if (!(cond)) \
+				{ \
+					if (mutils::ReportFailure(#cond, __FILE__, __LINE__, (msg), __VA_ARGS__) == \
+						mutils::Halt) \
+						MUTILS_HALT(); \
+				} \
+			} while(0)
+
+		#define MUTILS_ASSERT_FAIL(msg, ...) \
+			do \
+			{ \
+				if (mutils::ReportFailure(0, __FILE__, __LINE__, (msg), __VA_ARGS__) == \
+					mutils::Halt) \
+				MUTILS_HALT(); \
+			} while(0)
+
+		#define MUTILS_VERIFY(cond) MUTILS_ASSERT(cond)
+		#define MUTILS_VERIFY_MSG(cond, msg, ...) MUTILS(cond, msg, ##__VA_ARGS__)
+	#else
+		#define MUTILS_ASSERT(condition) \
+			do { MUTILS_UNUSED(condition); } while(0)
+		#define MUTILS(condition, msg, ...) \
+			do { MUTILS_UNUSED(condition); MUTILS_UNUSED(msg); } while(0)
+		#define MUTILS_ASSERT_FAIL(msg, ...) \
+			do { MUTILS_UNUSED(msg); } while(0)
+		#define MUTILS_VERIFY(cond) (void)(cond)
+		#define MUTILS_VERIFY_MSG(cond, msg, ...) \
+			do { (void)(cond); MUTILS_UNUSED(msg); } while(0)
+	#endif
+
+	#define MUTILS_STATIC_ASSERT(x) \
+		typedef char MmgStaticAssert[(x) ? 1 : -1];
+#endif
 

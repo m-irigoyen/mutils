@@ -1,8 +1,13 @@
 #include <mutils\vec2.hpp>
 
+#include <mutils/stringutils.hpp>
+
 /* Includes - STL */
 #include <iostream>
 #include <cmath>
+#include <sstream>
+#include <algorithm>
+#include <iterator>
 
 namespace mutils
 {
@@ -210,10 +215,38 @@ namespace mutils
 		return std::sqrt(std::pow(this->x, 2) + std::pow(this->y, 2));
 	}
 
-	const std::string Vec2::toString() const
+	std::string Vec2::toString() const
 	{
-		return std::string("[" + std::to_string(x) + ", " + std::to_string(y) + "]");
+		return std::string("[" + std::to_string(x) + "," + std::to_string(y) + "]");
 	}
+
+	bool Vec2::fromString(const std::string& s)
+	{
+		reassign(0.f,0.f);
+		if (s.empty())
+		{
+			return false;
+		}
+
+		if ((s[0] != '[') || (s[s.size()-1] != ']'))
+		{
+			return false;
+		}
+
+		std::string s2(s, 1, s.size()-2);
+
+		// Splitting by the ',' in the middle
+		std::vector<std::string> tokens = mutils::split(s2, '\n');
+		if (tokens.size() != 2)
+		{
+			return false;
+		}
+		else
+		{
+			reassign(std::stof(tokens[0]), std::stof(tokens[1]));
+		}
+	}
+
 	float Vec2::degToRad(float angleInDegree)
 	{
 		return angleInDegree * PI / 180;

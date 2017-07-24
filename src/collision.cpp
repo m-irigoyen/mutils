@@ -2,7 +2,7 @@
 
 namespace mutils
 {
-	bool mutils::isInAABB(Vec2 p, Vec2 aabbTopLeft, Vec2 aabbBottomRight)
+	bool isInAABB(Vec2 p, Vec2 aabbTopLeft, Vec2 aabbBottomRight)
 	{
 		// Changing coordinates so that aabtopleft is 0,0
 		aabbBottomRight -= aabbTopLeft;
@@ -10,7 +10,7 @@ namespace mutils
 		return (p.x >= 0) && (p.y >= 0) && (p.x <= aabbBottomRight.x) && (p.y <= aabbBottomRight.y);
 	}
 
-	bool mutils::isInCircle(Vec2 p, Vec2 center, float radius)
+	bool isInCircle(Vec2 p, Vec2 center, float radius)
 	{
 		// TODO : assert radius >= 0
 		return (center - p).length() <= radius;

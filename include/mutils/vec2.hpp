@@ -219,7 +219,21 @@ namespace mutils
 		* A string representation of this vector
 		* ->std::string	This vector to a string
 		*/
-		const std::string toString() const;
+		std::string toString() const;
+
+		/*
+		* Reassigns vector from string representation. If string is invalid, reset Vector to 0,0
+		* ->std::string	The string to take values from
+		* ->bool If the operation was successful
+		*/
+		bool fromString(const std::string& s);
+
+		//! Same as above, static version.
+		static bool fromString(const std::string& s, Vec2& result)
+		{
+			Vec2 v;
+			return v.fromString(s);
+		}
 
 		/*
 		* Convert an angle from degree to radian

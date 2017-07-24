@@ -1,6 +1,6 @@
 #pragma once
 
-#include "vec2.hpp"
+#include <mutils/vec2.hpp>
 
 namespace mutils
 {
