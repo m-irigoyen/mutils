@@ -29,7 +29,6 @@ namespace mutils
         //       before deleted status
 		AbstractResourceManager(const AbstractResourceManager&) = delete;
 		void operator=(const AbstractResourceManager&) = delete;
-	}
+	};
 }
 
-	

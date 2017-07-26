@@ -65,7 +65,7 @@ namespace mutils
 // MSVC
 //-----------------------
 
-#if (_MSC_VER == 1500)
+#if (_MSC_VER == 1900)
 	#define MUTILS_HALT() __debugbreak()
 	#define MUTILS_UNUSED(x) do { (void)sizeof(x); } while(0)
 
