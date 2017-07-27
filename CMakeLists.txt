@@ -15,9 +15,6 @@ FILE(GLOB_RECURSE HEADERS ${CMAKE_CURRENT_SOURCE_DIR}/include/mutils/*.hpp)
 
 add_library(${LIB_NAME} ${SRC} ${HEADERS})
 
-source_group("thirdparties/mutils/Headers" FILES ${MUTILS_HEADERS})
-source_group("thirdparties/mutils/Sources" FILES ${MUTILS_SRC})
-
 # SFML
 find_package(SFML 2 COMPONENTS system window graphics audio REQUIRED)
 if (SFML_FOUND)
