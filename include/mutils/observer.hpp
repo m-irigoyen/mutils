@@ -2,9 +2,10 @@
 
 namespace mutils
 {
+	class Observed;
 	class Observer
 	{
 	public:
-		virtual void notify() = 0;
+		virtual void onNotify(Observed* obs) = 0;
 	};
 }

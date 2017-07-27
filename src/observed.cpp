@@ -15,10 +15,16 @@ namespace mutils
 	{
 	}
 
+	std::vector<Observer*>::iterator find(std::vector<Observer*>& vec,
+		Observer * obs)
+	{
+		return std::find(vec.begin(), vec.end(), obs);
+	}
+
 	bool Observed::registerObserver(Observer * obs)
 	{
 		MUTILS_ASSERT(obs);
-		obsVec::iterator it = find(obs);
+		obsVec::iterator it = find(observers_, obs);
 		if (it != observers_.end())
 		{
 			observers_.push_back(obs);
@@ -31,7 +37,7 @@ namespace mutils
 	bool Observed::unregisterObserver(Observer * obs)
 	{
 		MUTILS_ASSERT(obs);
-		obsVec::iterator it = find(obs);
+		obsVec::iterator it = find(observers_, obs);
 		if (it != observers_.end())
 		{
 			observers_.erase(it);
@@ -42,21 +48,18 @@ namespace mutils
 
 	bool Observed::isRegistered(Observer * obs)
 	{
-		return find(obs) != observers_.end();
+		return find(observers_, obs) != observers_.end();
 	}
 
 	void Observed::notifyObservers()
 	{
 		for (Observer* o : observers_)
 		{
-			o->notify();
+			o->onNotify(this);
 			onObserverNotified(o);
 		}
 	}
 
-	std::vector<Observer*>::iterator Observed::find(Observer * obs)
-	{
-		return std::find(observers_.begin(), observers_.end(), obs);
-	}
+
 }
 

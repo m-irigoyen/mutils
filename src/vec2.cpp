@@ -30,7 +30,7 @@ namespace mutils
 	}
 
 	Vec2::Vec2(const sf::Vector2i & v)
-		: x(v.x), y(v.y)
+		: x((float)v.x), y((float)v.y)
 	{
 	}
 
@@ -237,14 +237,13 @@ namespace mutils
 
 		// Splitting by the ',' in the middle
 		std::vector<std::string> tokens = mutils::split(s2, '\n');
-		if (tokens.size() != 2)
-		{
-			return false;
-		}
-		else
+		if (tokens.size() == 2)
 		{
 			reassign(std::stof(tokens[0]), std::stof(tokens[1]));
+			return true;
 		}
+
+		return false;
 	}
 
 	float Vec2::degToRad(float angleInDegree)

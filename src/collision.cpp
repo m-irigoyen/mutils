@@ -2,6 +2,10 @@
 
 namespace mutils
 {
+	bool isInAABB(Vec2 p, sf::FloatRect r)
+	{
+		return isInAABB(p, Vec2(r.left, r.top), Vec2(r.left + r.width, r.top + r.height));
+	}
 	bool isInAABB(Vec2 p, Vec2 aabbTopLeft, Vec2 aabbBottomRight)
 	{
 		// Changing coordinates so that aabtopleft is 0,0

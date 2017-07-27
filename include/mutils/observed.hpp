@@ -19,8 +19,6 @@ namespace mutils
 		virtual void onObserverRegistered(Observer* obs) = 0;
 		virtual void onObserverNotified(Observer* obs) = 0;
 	private:
-		std::vector<Observer*>::iterator find(Observer* obs);
-
 		std::vector<Observer*> observers_;
 	};
 }
