@@ -25,7 +25,7 @@ namespace mutils
 	{
 		MUTILS_ASSERT(obs);
 		obsVec::iterator it = find(observers_, obs);
-		if (it != observers_.end())
+		if (it == observers_.end())
 		{
 			observers_.push_back(obs);
 			onObserverRegistered(obs);
