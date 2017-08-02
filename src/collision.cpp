@@ -2,9 +2,9 @@
 
 namespace mutils
 {
-	bool isInAABB(Vec2 p, sf::FloatRect r)
+	bool isInAABB(Vec2 p, float left, float top, float width, float height)
 	{
-		return isInAABB(p, Vec2(r.left, r.top), Vec2(r.left + r.width, r.top + r.height));
+		return isInAABB(p, Vec2(left, top), Vec2(left + width, top + height));
 	}
 	bool isInAABB(Vec2 p, Vec2 aabbTopLeft, Vec2 aabbBottomRight)
 	{

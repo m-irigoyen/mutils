@@ -58,12 +58,6 @@ namespace mutils
 	{
 	}
 
-	Variant::Variant(const sf::String value)
-		: t_(STRING)
-		, value_(value)
-	{
-	}
-
 	Variant::Variant(const Vec2 value)
 		: t_(VEC2)
 		, value_(value)
@@ -221,18 +215,6 @@ namespace mutils
 	}
 
 	std::string Variant::toStdString()
-	{
-		switch (t_)
-		{
-		case STRING:
-			return value_.s;
-		default:
-			MUTILS_ASSERT(false);
-		}
-		return "";
-	}
-
-	sf::String Variant::toSfString()
 	{
 		switch (t_)
 		{

@@ -14,10 +14,3 @@ FILE(GLOB_RECURSE SRC ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp)
 FILE(GLOB_RECURSE HEADERS ${CMAKE_CURRENT_SOURCE_DIR}/include/mutils/*.hpp)
 
 add_library(${LIB_NAME} ${SRC} ${HEADERS})
-
-# SFML
-find_package(SFML 2 COMPONENTS system window graphics audio REQUIRED)
-if (SFML_FOUND)
-   include_directories(${SFML_INCLUDE_DIR})
-   target_link_libraries(${LIB_NAME} ${SFML_LIBRARIES})
-endif()

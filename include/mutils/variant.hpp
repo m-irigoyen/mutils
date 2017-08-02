@@ -1,8 +1,8 @@
 #pragma once
 
-#include <SFML/System/String.hpp>
-#include <string>
 #include <mutils/vec2.hpp>
+
+#include <string>
 
 namespace mutils
 {
@@ -32,7 +32,6 @@ namespace mutils
 		Variant(char value);
 		Variant(const char* value);
 		Variant(const std::string value);
-		Variant(const sf::String value);
 		Variant(const Vec2 value);
 		Variant(void* value = nullptr);
 
@@ -44,7 +43,6 @@ namespace mutils
 		long toLong();
 		char toChar();
 		std::string toStdString();
-		sf::String toSfString();
 		Vec2 toVec2();
 		void* toUndef();
 

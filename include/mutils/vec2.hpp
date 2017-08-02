@@ -8,9 +8,6 @@ rewritten to my naming conventions
 /* Includes - STL */
 #include <string>
 
-/* Includes - SFML */
-#include <SFML/System/Vector2.hpp>
-
 namespace mutils
 {
 
@@ -26,8 +23,6 @@ namespace mutils
 		Vec2(void);
 		Vec2(const Vec2&);
 		Vec2(float, float);
-		Vec2(const sf::Vector2f&);
-		Vec2(const sf::Vector2i&);
 		~Vec2(void);
 
 		/*
@@ -208,12 +203,6 @@ namespace mutils
 		* @float		Maximum y value
 		*/
 		void clamp(float minX, float maxX, float minY, float maxY);
-
-		/*
-		* Converts this vector to a SFML vector
-		* -> sf::Vector2f	The new vector
-		*/
-		const sf::Vector2f toSFMLVector() const;
 
 		/*
 		* A string representation of this vector

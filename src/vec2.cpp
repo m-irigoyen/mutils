@@ -24,16 +24,6 @@ namespace mutils
 	{
 	}
 
-	Vec2::Vec2(const sf::Vector2f &v)
-		: x(v.x), y(v.y)
-	{
-	}
-
-	Vec2::Vec2(const sf::Vector2i & v)
-		: x((float)v.x), y((float)v.y)
-	{
-	}
-
 	Vec2::~Vec2(void)
 	{
 	}
@@ -73,11 +63,6 @@ namespace mutils
 			x = minY;
 		else if (x > maxY)
 			x = maxY;
-	}
-
-	const sf::Vector2f Vec2::toSFMLVector() const
-	{
-		return sf::Vector2f(this->x, this->y);
 	}
 
 	Vec2& Vec2::operator+=(const Vec2 otr)
